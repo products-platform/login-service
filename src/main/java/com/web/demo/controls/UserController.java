@@ -50,4 +50,17 @@ public class UserController {
     public List<UserResponse> getAll() {
         return service.getAllUsers();
     }
+
+    /*@PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordRequest req) {
+        User user = userRepository.findByEmail(req.getEmail())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setPassword(passwordEncoder.encode(req.getNewPassword()));
+        user.setPasswordChangedAt(LocalDate.now());
+
+        userRepository.save(user);
+
+        return ResponseEntity.ok("Password updated successfully");
+    }*/
 }

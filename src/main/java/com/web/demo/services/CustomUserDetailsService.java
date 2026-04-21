@@ -1,6 +1,6 @@
 package com.web.demo.services;
 
-import com.web.demo.dtos.CustomUserDetails;
+import com.web.demo.customer.CustomUserDetails;
 import com.web.demo.models.User;
 import com.web.demo.repos.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -44,4 +44,5 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         return new CustomUserDetails(user);
     }
+
 }

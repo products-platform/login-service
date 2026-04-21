@@ -1,4 +1,4 @@
-package com.web.demo.dtos;
+package com.web.demo.customer;
 
 import com.web.demo.models.User;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,43 +9,44 @@ import java.util.Collection;
 
 public class CustomUserDetails implements UserDetails {
 
-    private String username;
-    private String password;
-    private String email;
-    private String phone;
-    private Collection<? extends GrantedAuthority> authorities;
+    private final User user;
 
     public CustomUserDetails(User user) {
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-        this.email = user.getEmail();
-        this.phone = user.getPhone();
-        this.authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
-                .toList();
+        this.user = user;
     }
 
     public String getEmail() {
-        return email;
+        return user.getEmail();
     }
 
     public String getPhone() {
-        return phone;
+        return user.getPhone();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        return user.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName().name()))
+                .toList();
     }
 
     @Override
     public String getPassword() {
-        return password;
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return user.getUsername();
     }
 
+    @Override
+    public boolean isAccountNonLocked() {
+        return user.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return user.isEnabled();
+    }
 }

@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -43,6 +44,15 @@ public class User {
 
     private boolean enabled;
 
+    @Column(name = "FAILED_ATTEMPTS")
+    private int failedAttempts;
+
+    @Column(name = "ACCOUNT_NON_LOCKED")
+    private boolean accountNonLocked = true;
+
+    @Column(name = "LOCK_TIME")
+    private LocalDateTime lockTime;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "USER_ROLES",
@@ -50,4 +60,29 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID")
     )
     private Set<Role> roles;
+
+    // 🔐 Lock logic
+    public void increaseFailedAttempts() {
+        this.failedAttempts++;
+    }
+
+    public void resetFailedAttempts() {
+        this.failedAttempts = 0;
+    }
+
+    public void lockAccount() {
+        this.accountNonLocked = false;
+        this.lockTime = LocalDateTime.now();
+    }
+
+    public void unlockAccount() {
+        this.accountNonLocked = true;
+        this.failedAttempts = 0;
+        this.lockTime = null;
+    }
+
+    public boolean isLockExpired() {
+        return lockTime != null &&
+                lockTime.plusMinutes(15).isBefore(LocalDateTime.now());
+    }
 }
