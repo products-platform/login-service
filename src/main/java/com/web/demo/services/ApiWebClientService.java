@@ -1,4 +1,5 @@
 package com.web.demo.services;
+/*
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
@@ -71,4 +72,4 @@ public class ApiWebClientService {
     public CompletableFuture<String> fallback(Throwable ex) {
         return CompletableFuture.completedFuture("Fallback response: " + ex.getMessage());
     }
-}
+}*/

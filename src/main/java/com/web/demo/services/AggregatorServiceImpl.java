@@ -9,12 +9,10 @@ import java.util.concurrent.ExecutionException;
 public class AggregatorServiceImpl implements AggregatorService {
 
     private final ApiService apiService;
-    private final ApiWebClientService apiWebClientService;
 
-    public AggregatorServiceImpl(ApiService apiService,
-                                 ApiWebClientService apiWebClientService) {
+    public AggregatorServiceImpl(ApiService apiService) {
         this.apiService = apiService;
-        this.apiWebClientService = apiWebClientService;
+        //this.apiWebClientService = apiWebClientService;
     }
 
     public String getAllResponses() throws InterruptedException, ExecutionException {
@@ -32,7 +30,7 @@ public class AggregatorServiceImpl implements AggregatorService {
                 api4.get();
     }
 
-    public String getAllResponsesTemp() throws Exception {
+   /* public String getAllResponsesTemp() throws Exception {
         CompletableFuture<String> a1 = apiWebClientService.callApi1();
         CompletableFuture<String> a2 = apiWebClientService.callApi2();
         CompletableFuture<String> a3 = apiWebClientService.callApi3();
@@ -44,5 +42,5 @@ public class AggregatorServiceImpl implements AggregatorService {
                 a2.get() + "\n" +
                 a3.get() + "\n" +
                 a4.get();
-    }
+    }*/
 }
