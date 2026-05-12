@@ -1,5 +1,6 @@
 package com.web.demo.exceptions;
 
+import com.product.exceptions.DuplicateUserException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 

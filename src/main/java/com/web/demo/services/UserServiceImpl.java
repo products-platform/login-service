@@ -1,9 +1,9 @@
 package com.web.demo.services;
 
+import com.product.exceptions.InvalidRoleAssignmentException;
+import com.product.exceptions.MissingDefaultRoleException;
 import com.web.demo.enums.RoleName;
 import com.web.demo.exceptions.DatabaseExceptionMapper;
-import com.web.demo.exceptions.InvalidRoleAssignmentException;
-import com.web.demo.exceptions.MissingDefaultRoleException;
 import com.web.demo.mappers.UserMapper;
 import com.web.demo.models.Role;
 import com.web.demo.models.User;
